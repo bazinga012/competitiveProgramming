@@ -1,0 +1,1 @@
+https://github.com/Errichto/contest_library/blob/master/template.cpp
