@@ -1,3 +1,11 @@
+//
+#include <iostream>
+#include <map>
+using namespace std;
+
+struct ListNode{
+    ListNode* next;
+};
 ListNode *detectCycle(ListNode *head) {
     map<ListNode*,bool> hash;
     ListNode *curr=head;
