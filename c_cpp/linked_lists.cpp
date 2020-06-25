@@ -514,3 +514,43 @@ void RecursiveReverse(struct node **headRef)
     first->next = NULL;        // (tricky step -- make a drawing)
     *headRef = rest;           // fix the head pointer
 }
+
+void removeLoop(struct node *head, struct node *pointOfMeet)
+{
+    struct node *curr = head;
+    while (curr != pointOfMeet->next)
+    {
+        curr = curr->next;
+        pointOfMeet = pointOfMeet->next;
+    }
+    pointOfMeet->next = NULL;
+}
+
+void detectCorrectLoop(struct node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    node *slow = head;
+    node *fast = head->next;
+    while (fast != NULL)
+    {
+        if (slow == fast)
+        {
+            removeLoop(head, fast);
+            return;
+        }
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            if (slow == fast)
+            {
+                removeLoop(head, fast);
+                return;
+            }
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+}
