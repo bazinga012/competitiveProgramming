@@ -67,6 +67,7 @@
         "*.tcc": "cpp",
         "hash_map": "cpp",
         "cinttypes": "cpp",
-        "hashtable": "cpp"
+        "hashtable": "cpp",
+        "climits": "cpp"
     }
 }
