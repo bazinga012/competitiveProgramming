@@ -41,7 +41,7 @@ void stableSelectionSort(int data[], int count)
             if (data[j] < data[minimum])
                 minimum = j;
         temp = data[minimum];
-        for (j = minimum; j > i; j--)
+        for (int j = minimum; j > i; j--)
             data[j] = data[j - 1];
         data[i] = temp;
     }
