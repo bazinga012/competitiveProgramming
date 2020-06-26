@@ -14,13 +14,18 @@ int find(int *parent, int n, int i)
     return parent[i];
 }
 
-
 void unify(int *parent, int *rank, int n, int x, int y)
 {
     /* Also, size (in place of height) of trees can also be used as rank. 
     Using size as rank also yields worst case time complexity as O(Logn) */
     int xroot = find(parent, n, x);
     int yroot = find(parent, n, y);
+
+    if (xroot == yroot)
+    {
+        return;
+    }
+
     if (rank[xroot] < rank[yroot])
     {
         parent[xroot] = yroot;
