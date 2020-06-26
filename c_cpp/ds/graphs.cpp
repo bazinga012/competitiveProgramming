@@ -5,9 +5,9 @@
 #include <bitset>
 #include <list>
 #include <stack>
-#define MAX_NODES = 5000;
+#define MAX_NODES 5000
 typedef vector<list<int>> graph;
-typedef bitset<5000> nodeBits;
+typedef bitset<MAX_NODES> nodeBits;
 
 using namespace std;
 
