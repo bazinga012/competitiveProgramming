@@ -22,17 +22,17 @@ void insert(Trie *&root, const string &str)
     {
         root = getNewTrieNode();
     }
-    Trie *temp = root;
+    Trie *curr = root;
     for (int i = 0; i < str.length(); i++)
     {
         char x = str[i];
-        if (temp->map.find(x) == temp->map.end())
+        if (curr->map.find(x) == curr->map.end())
         {
-            temp->map[x] = getNewTrieNode();
+            curr->map[x] = getNewTrieNode();
         }
-        temp = temp->map[x];
+        curr = curr->map[x];
     }
-    temp->isEndOfWord = true;
+    curr->isEndOfWord = true;
 }
 
 bool search(Trie *root, const string &str)
@@ -42,15 +42,13 @@ bool search(Trie *root, const string &str)
         return false;
     }
     Trie *curr = root;
-    Trie *temp;
     for (int i = 0; i < str.length(); i++)
     {
-        temp = curr->map.find(str[i]);
-        if (temp == curr->map.end())
+        if (curr->map.find(str[i]) == (curr->map).end())
         {
             return false;
         }
-        curr = temp;
+        curr = curr->map[str[i]];
     }
-    return temp->isEndOfWord;
+    return curr->isEndOfWord;
 }
