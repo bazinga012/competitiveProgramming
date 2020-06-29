@@ -203,55 +203,80 @@ int popFromSWithMinEff(stack<int> s, int *minStack)
 }
 
 /*  print-leaf-nodes-from-preorder-traversal-of-bst */
-void printLeafNodesFromPreOrderBST(int* preOrder, int n){
-    if(n==0)return;
-    if(n==1){cout << preOrder[0] << "\n"; return;}
+void printLeafNodesFromPreOrderBST(int *preOrder, int n)
+{
+    if (n == 0)
+        return;
+    if (n == 1)
+    {
+        cout << preOrder[0] << "\n";
+        return;
+    }
     stack<int> dec_l;
     dec_l.push(0);
-    int i=1;
-    while(i<n){
-        if(preOrder[i] <= preOrder[i-1]){
+    int i = 1;
+    while (i < n)
+    {
+        if (preOrder[i] <= preOrder[i - 1])
+        {
             dec_l.push(i);
-        }else{
-            if(dec_l.top() == i-1){
+        }
+        else
+        {
+            if (dec_l.top() == i - 1)
+            {
                 dec_l.pop();
             }
-            if(!dec_l.empty() && (preOrder[i] > preOrder[dec_l.top()])){
-                cout << preOrder[i-1] << " ";
+            if (!dec_l.empty() && (preOrder[i] > preOrder[dec_l.top()]))
+            {
+                cout << preOrder[i - 1] << " ";
             }
             /* maintaining decreasing order */
-            while(!dec_l.empty() && preOrder[dec_l.top()] < preOrder[i]){
+            while (!dec_l.empty() && preOrder[dec_l.top()] < preOrder[i])
+            {
                 dec_l.pop();
             }
             dec_l.push(i);
         }
-        i+=1;
+        i += 1;
     }
-    cout << preOrder[n-1] << "\n";
+    cout << preOrder[n - 1] << "\n";
 }
 
-void printLeafNodesFromPreOrderBST2(int* preOrder, int n){
-    if(n==0)return;
-    if(n==1){cout << preOrder[0] << "\n"; return;}
+void printLeafNodesFromPreOrderBST2(int *preOrder, int n)
+{
+    if (n == 0)
+        return;
+    if (n == 1)
+    {
+        cout << preOrder[0] << "\n";
+        return;
+    }
     stack<int> dec_l;
     dec_l.push(0);
-    int i=1;
-    while(i<n){
-        if(preOrder[i] <= preOrder[i-1]){
-            dec_l.push(i-1);
-        }else{
-            if(!dec_l.empty() && (preOrder[i] > preOrder[dec_l.top()])){
-                cout << preOrder[i-1] << " ";
+    int i = 1;
+    while (i < n)
+    {
+        if (preOrder[i] <= preOrder[i - 1])
+        {
+            dec_l.push(i - 1);
+        }
+        else
+        {
+            if (!dec_l.empty() && (preOrder[i] > preOrder[dec_l.top()]))
+            {
+                cout << preOrder[i - 1] << " ";
             }
             /* maintaining decreasing order */
-            while(!dec_l.empty() && preOrder[dec_l.top()] < preOrder[i]){
+            while (!dec_l.empty() && preOrder[dec_l.top()] < preOrder[i])
+            {
                 dec_l.pop();
             }
             dec_l.push(i);
         }
-        i+=1;
+        i += 1;
     }
-    cout << preOrder[n-1] << "\n";
+    cout << preOrder[n - 1] << "\n";
 }
 
 /* 
@@ -529,24 +554,125 @@ Stack using queues
         Return the item stored in step 2.
  */
 
-
 /* queues */
 
 /* minimum-cost-of-ropes */
-ll minCostForRopeJoining(int* arr, int n){
-    if(n==0 || n==1)return 0;
-    priority_queue<ll, vector<ll> ,greater<ll> > q;
-    for(int i=0; i<n ;i++){
-	       q.push(arr[i]);	    
-	}
-	ll r1, r2, cost = 0;
-	while(q.size() > 1){
-	    r1 = q.top();
-	    q.pop();
-	    r2 = q.top();
-	    cost += (r1+r2);
-	    q.pop();
-	    q.push(r1+r2);
-	}
-	return cost;
+ll minCostForRopeJoining(int *arr, int n)
+{
+    if (n == 0 || n == 1)
+        return 0;
+    priority_queue<ll, vector<ll>, greater<ll>> q;
+    for (int i = 0; i < n; i++)
+    {
+        q.push(arr[i]);
+    }
+    ll r1, r2, cost = 0;
+    while (q.size() > 1)
+    {
+        r1 = q.top();
+        q.pop();
+        r2 = q.top();
+        cost += (r1 + r2);
+        q.pop();
+        q.push(r1 + r2);
+    }
+    return cost;
+}
+
+struct petrolPump
+{
+    int petrol;
+    int distance;
+};
+
+int tour(petrolPump p[], int n)
+{
+    //Your code here
+    int st = 0, i = 0, c, stc;
+    int prev_sum = 0, curr_sum = stc;
+
+    while (i < n)
+    {
+        curr_sum += (p[i].petrol - p[i].distance);
+        while (st < n && curr_sum < 0)
+        {
+            prev_sum+=curr_sum;
+            curr_sum = 0;
+            
+            stc = p[st].petrol - p[st].distance;
+            curr_sum -= stc;
+            prev_sum += stc;
+            st += 1;
+            if (st >= i)
+            {
+                i += 1;
+            }
+        }
+        if(st==n)return -1;
+        st = i;
+        i+=1;
+    }
+    if(i==n){
+        if(curr_sum+prev_sum>=0)return st;
+        return -1;
+    }
+
+    i = st + 1;
+    while (st < n && i < n)
+    {
+        while (st < n && p[st].petrol - p[st].distance < 0)
+        {
+            prev_sum += p[st].petrol - p[st].distance;
+            st += 1;
+            if (st == n)
+                return -1;
+        }
+        curr_sum = p[st].petrol - p[st].distance;
+        i = st + 1;
+        while (i < n)
+        {
+            curr_sum += (p[i].petrol - p[i].distance);
+            while (curr_sum < 0)
+            {
+                stc = p[st].petrol - p[st].distance;
+                curr_sum -= stc;
+                prev_sum += stc;
+                st += 1;
+                if (st >= i)
+                {
+                    i += 1;
+                }
+            }
+            if (curr_sum + c >= 0)
+            {
+                curr_sum += c;
+                i += 1;
+            }
+        }
+        if (i == n)
+        {
+            if (curr_sum + prev_sum >= 0)
+            {
+                return st;
+            }
+            return -1;
+        }
+
+        c = (p[i].petrol - p[i].distance);
+        if (curr_sum + c >= 0)
+        {
+            curr_sum += c;
+            i += 1;
+        }
+        else
+        {
+            stc = (p[st].petrol - p[st].distance);
+            while (st < i && curr_sum - stc + c < 0)
+            {
+                curr_sum -= stc;
+                prev_sum += stc;
+                st += 1;
+            }
+        }
+    }
 }
