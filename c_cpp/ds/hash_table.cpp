@@ -1,4 +1,5 @@
 #include <unordered_map>
+#include <string>
 using namespace std;
 int main()
 {
@@ -33,3 +34,27 @@ int main()
     it->second;
     return 0;
 }
+
+/* length-of-the-longest-substring */
+int lenLongestSubStrWithoutRepeatChar(string str){
+    int n = str.length();
+    if(n <= 1)return n;
+    unordered_map<char, int> presenceMap;
+    presenceMap[str[0]] = 0;
+    int i=0, j=1, m=0;
+    while(j < n){
+        if(presenceMap.find(str[j]) != presenceMap.end() && presenceMap[str[j]] >= i){ // char is repeating in currect window [i,j]
+            if((j-i) > m){
+                m = j-i;
+            }
+            i = presenceMap[str[j]] + 1;
+        }
+        presenceMap[str[j]] = j;
+        j+=1;
+    }
+    if((j-i) > m){
+        m = j-i;
+    }
+    return m;
+}
+
