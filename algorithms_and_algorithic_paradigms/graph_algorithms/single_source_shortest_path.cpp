@@ -30,10 +30,10 @@ void Dijkstra(graph& G, int s, vi& D){
     int u, v, w, d;
     while(!Q.empty()){
         ii top = Q.top(); Q.pop();
-        u = top.second(); d = top.first();
+        u = top.second; d = top.first;
         if(d < D[u])
         for(int j=0; j < G[u].size(); j++){
-            v = G[u][j].first(); w = G[u][j].second();
+            v = G[u][j].first; w = G[u][j].second;
             if(D[v]> D[u] + w){
                 D[v] = D[u] + w; Q.push(ii(D[v], v));
             }
@@ -53,7 +53,7 @@ int Bellmanford(graph& G, vi& D){ //source=0
      for(int u=0;u<G.size();u++){
         for(int i=0; i<G[u].size();i++){
             d = G[u].first; v = G[u].second;
-            if(D[v] > D[u] + d){cout<< “NegWgtCycle”; return -1;}
+            if(D[v] > D[u] + d){cout<< "NegWgtCycle"; return -1;}
         }
      }
      return 0;

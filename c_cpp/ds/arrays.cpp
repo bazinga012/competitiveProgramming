@@ -42,3 +42,28 @@ int main(int argc, char const *argv[])
     qsort(arr1, n, sizeof(int), compareMyType);
     return 0;
 }
+
+/* Celebrity problem 
+algo: (with minimum number of comparisons)
+*/
+int getCelebrityIndex(int** M, int n)
+{
+    //Your code here
+    int s = 0, e = n-1;
+    while(s < e){
+        if(M[s][e] == 1){
+            s+=1; // s is not a celebrity since he knows e
+        }else{
+            e-=1; // e is not a celebrity since s does not know him
+        }
+    }
+    //check if e is celebrity
+    for(int i=0; i< e; i++){
+            if(M[e][i] == 1 || M[i][e] == 0){return -1;}  
+    }
+    for(int i=e+1; i<n; i++){
+            if(M[e][i] == 1 || M[i][e] == 0){return -1;}  
+    }
+
+    return e;
+}
