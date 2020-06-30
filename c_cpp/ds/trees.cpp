@@ -130,6 +130,7 @@ void constructBT(node **root, int *i, int n, int *pre, char *preLN)
     constructBT(&((*root)->right), i, n, pre, preLN);
 }
 
+/* BST from preorder */
 void bstFromPreorderC(node **root, vector<int> &preorder, int *i, int l, int h)
 {
     if ((*i) >= preorder.size())
@@ -143,6 +144,7 @@ void bstFromPreorderC(node **root, vector<int> &preorder, int *i, int l, int h)
     bstFromPreorderC(&((*root)->right), preorder, i, ((*root)->data) + 1, h);
 }
 
+/* TopView */
 void topView(struct node *root)
 {
     if (root == NULL)
@@ -167,6 +169,7 @@ void topView(struct node *root)
     }
 }
 
+/* BottomView */
 typedef pair<node *, int> pni;
 void bottomView(node *root)
 {
@@ -201,6 +204,7 @@ void bottomView(node *root)
     }
 }
 
+/* RightView */
 void rightView(node *root)
 {
     if (root == NULL)
@@ -231,6 +235,7 @@ void rightView(node *root)
     }
 }
 
+/* LeftView */
 void leftView(node *root)
 {
     if (root == NULL)
@@ -259,6 +264,7 @@ void leftView(node *root)
     }
 }
 
+/* DiagonalView */
 typedef map<int, vector<int>> ivmap;
 void digView(node *root, ivmap &sameDNodes, int d)
 {
@@ -290,6 +296,7 @@ void digViewWrapper(node *root)
     }
 }
 
+/* IsBST check */
 bool isBst(node *root, int minLim, int maxLim)
 {
     if (root == NULL)
@@ -302,6 +309,7 @@ bool isBst(node *root, int minLim, int maxLim)
             isBst(root->right, root->data + 1, maxLim));
 }
 
+/* FindInBst */
 bool findInBst(node *root, int val)
 {
     if (root == NULL)
@@ -314,6 +322,8 @@ bool findInBst(node *root, int val)
         return findInBst(root->left, val);
     return false;
 }
+
+/* LeastCommonAncestor In BST */
 node *compare(node *nd, int val)
 {
     if (nd == NULL)
@@ -341,6 +351,7 @@ node *lcaBst(node *root, int n1, int n2)
     return NULL;
 }
 
+/* LeastCommonAncestor in BinaryTree */
 void getLCA(node *root, int n1, int n2, node **lca, bitset<2> &searchBits)
 {
     if ((*lca) != NULL || root == NULL)
@@ -377,4 +388,22 @@ node *lcaBinary(node *root, int n1, int n2)
     bitset<2> searchBits;
     getLCA(root, n1, n2, &lca, searchBits);
     return lca;
+}
+
+/* MaxDiagonal or Width of BinaryTree */
+int customDiameter(node* root, int* h){
+    if(root==NULL)return 0;
+    int l=0, r=0;
+    int ld = customDiameter(root->left, &l);
+    int rd = customDiameter(root->right, &r);
+    *h = max(l ,r) + 1;
+    return max(max(ld, rd), l + 1 + r); 
+}
+
+/* Computes the diameter of binary tree with given root.  */
+int diameter(node* root) {
+    // Your code here
+    if(root==NULL)return 0;
+    int h = 0;
+    return customDiameter(root, &h);
 }
