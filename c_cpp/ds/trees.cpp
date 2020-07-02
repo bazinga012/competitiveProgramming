@@ -407,3 +407,48 @@ int diameter(node* root) {
     int h = 0;
     return customDiameter(root, &h);
 }
+
+/* BST delete node */
+node* deleteNode(node* root, int k) 
+{
+    if (root == NULL) 
+        return root; 
+   
+    if (root->data > k) { 
+        root->left = deleteNode(root->left, k); 
+        return root; 
+    } 
+    else if (root->data < k) { 
+        root->right = deleteNode(root->right, k); 
+        return root; 
+    } 
+    // root is the node to be deleted. 
+    
+    if (root->left == NULL) { 
+        node* temp = root->right; 
+        delete root; 
+        return temp; 
+    } 
+    else if (root->right == NULL) { 
+        node* temp = root->left; 
+        delete root; 
+        return temp; 
+    } 
+    else { 
+  
+        node* succParent = root; 
+        node* succ = root->right; 
+        while (succ->left != NULL) { 
+            succParent = succ; 
+            succ = succ->left; 
+        }  
+        if (succParent != root) 
+            succParent->left = succ->right; 
+        else
+            succParent->right = succ->right; 
+  
+        root->data = succ->data; 
+        delete succ;          
+        return root; 
+    } 
+} 
