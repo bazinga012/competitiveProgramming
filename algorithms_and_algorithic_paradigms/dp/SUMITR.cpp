@@ -10,10 +10,12 @@ int main()
     cin >> l;
     int a[l + 1][l + 1] = {};
     Z(i, l)
-        Z(j, i) cin >> a[i][j];
+    Z(j, i)
+        cin >> a[i][j];
     m = 0;
     Z(i, l)
-    Z(j, i) m = max(m, a[i][j] += max(a[i - 1][j], a[i - 1][j - 1]));
+    Z(j, i)
+    m = max(m, a[i][j] += max(a[i - 1][j], a[i - 1][j - 1]));
     cout << m << "\n";
   }
   return 0;

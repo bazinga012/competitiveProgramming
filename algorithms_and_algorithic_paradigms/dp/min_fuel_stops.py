@@ -2,6 +2,7 @@ import math
 import bisect
 from typing import List
 
+
 class Solution:
     def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
         if(target <= startFuel):
@@ -16,7 +17,7 @@ class Solution:
             if idx >= d_len:
                 return -1
             dp.append(dp[d_len-1] + extra_dist)
-            for i in range(d_len-1, idx, -1): # tricky reverse loop
+            for i in range(d_len-1, idx, -1):  # tricky reverse loop
                 dp[i] = max(dp[i], dp[i-1] + extra_dist)
         idx = bisect.bisect_left(dp, target)
         d_len = len(dp)
