@@ -2,6 +2,7 @@
 #include <string.h>
 #include <cmath>
 
+/* patten: #string_chars_matrix */
 using namespace std;
 
 int longest_common_subsequence(string s1, string s2)

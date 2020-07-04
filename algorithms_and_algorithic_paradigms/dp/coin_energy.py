@@ -1,3 +1,5 @@
+# pattern: #bottom_up, #state_generation
+
 def get_max_coins(coins, energy, ie):
   # ie is initial energy
   n = len(coins)
@@ -11,15 +13,17 @@ def get_max_coins(coins, energy, ie):
   for i in range(1, n):
     m = 0
     for e in dp[i-1].keys():
-      if e-1>=0:
+      if e-1 >= 0:
         new_energy_state = min(e + energy[i] - 1, n-i-1)
-        a = dp[i][new_energy_state] = max(dp[i-1][e], dp[i].get(new_energy_state, 0))
+        a = dp[i][new_energy_state] = max(
+            dp[i-1][e], dp[i].get(new_energy_state, 0))
         b = 0
         b = dp[i][e-1] = max(dp[i-1][e] + coins[i], dp[i].get(e-1, 0))
-        m = max(m,a,b)
+        m = max(m, a, b)
     g_max = max(g_max, m)
   # print(dp)
   return g_max
+
 
 def algo2(coins, energy, ie):
   n = len(energy)
@@ -35,6 +39,7 @@ def algo2(coins, energy, ie):
               if (e == 0):
                   dp[i][e] = max(dp[i][e], coins[i])
   return dp[0][min(n, ie)]
+
 
 tc = int(input())
 while tc:

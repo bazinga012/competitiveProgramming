@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/longest-palindromic-subsequence/
+# patten: #string_chars_matrix
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
         n = len(s)

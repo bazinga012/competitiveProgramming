@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+/* patten: #solu_ending_at_i */
 
 /* 
 void * memset ( void * ptr, int value, size_t num );
@@ -48,7 +49,7 @@ int get_right_bisect_idx_in_idx_list(int *arr, int n, int *idx_arr, int idx_arr_
   while (l < h)
   {
     /* we need to make sure that l is not replaced as that case is already handled */
-    m = (l + h + 1) / 2; 
+    m = (l + h + 1) / 2;
     if (val <= arr[idx_arr[m]])
     {
       if (val > arr[idx_arr[m - 1]])
