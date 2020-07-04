@@ -452,3 +452,12 @@ node* deleteNode(node* root, int k)
         return root; 
     } 
 } 
+
+
+void printAllPaths(node* root, vector<int> paths){
+    if(root == NULL){return;}
+    for(int i=0; i< paths.size(); i++){
+        
+    }
+
+}
