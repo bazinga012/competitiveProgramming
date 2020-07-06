@@ -4,7 +4,7 @@
 using namespace std;
 int move_gen[8][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1}};
 int max(int a, int b) { return a > b ? a : b; }
-
+/* https://www.spoj.com/problems/ABCPATH/ */
 int DFS(char **chars, int **dp, int r, int c, int i, int j)
 {
 	int u, v, tmp, m = 0;

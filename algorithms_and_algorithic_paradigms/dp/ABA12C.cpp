@@ -7,7 +7,7 @@ int min(int a, int b)
 {
     return (a > b ? b : a);
 }
-
+/* https://www.spoj.com/problems/ABA12C/ */
 int main()
 {
     int t, n, k;

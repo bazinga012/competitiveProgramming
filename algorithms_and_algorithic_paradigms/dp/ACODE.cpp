@@ -5,7 +5,7 @@
 
 using namespace std;
 #define MAX_BUFFER 5002
-
+/* https://www.spoj.com/problems/ACODE/ */
 int main()
 {
   char buff[MAX_BUFFER];
